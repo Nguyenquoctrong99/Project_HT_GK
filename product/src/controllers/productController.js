@@ -110,22 +110,13 @@ class ProductController {
     }
   }
   //#endregion----------------------------------------
-  async getProductsById(req, res) {
-    try {
-      const p = await Product.findById(req.params.id);
-      if (!p)
-        return res
-          .status(404)
-          .json({ success: 0, msg: `Không tìm thấy ID: ${req.params.id}` });
-      res.json({ success: 1, msg: "OK", data: p });
-    } catch (e) {
-      res
-        .status(e.name === "CastError" ? 400 : 500)
-        .json({
-          success: 0,
-          msg: e.name === "CastError" ? "ID sai định dạng" : "Lỗi server",
-        });
-    }
+  async getProductById(req, res, next){
+      const {id} = req.params;
+      const product = await Product.findById(id);
+      if(!product){
+         return res.status(400).json({message : 'Product not found'});
+      }
+      return res.status(200).json(product);
   }
 }
 

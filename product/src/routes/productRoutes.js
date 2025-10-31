@@ -11,3 +11,4 @@ router.get("/", isAuthenticated, productController.getProducts);
 
 router.get("/:id", isAuthenticated, productController.getProductsById); 
 module.exports = router;
+ 
