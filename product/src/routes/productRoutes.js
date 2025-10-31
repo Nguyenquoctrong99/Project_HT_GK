@@ -10,4 +10,6 @@ router.post("/buy", isAuthenticated, productController.createOrder);
 router.get("/", isAuthenticated, productController.getProducts);
 
 
+
 module.exports = router;
+
